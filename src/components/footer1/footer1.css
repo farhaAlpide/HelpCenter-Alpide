@@ -1,0 +1,33 @@
+.footerContainer{
+    position: fixed;
+    bottom: 0;
+    padding: 2rem 10rem;
+    width: calc(100% - 320px);
+}
+
+.footerArea{
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftsection{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+ .leftsection p{
+    font-size: 14px ;
+    font-weight: 600;
+    font-family:  Inter, sans-serif ;
+    color: #58596C;
+}
+
+.rightsection{
+    .ant-btn-default{
+        width: 140px;
+    height: 48px;
+    }
+    display: flex;
+    gap: 1rem;
+}
