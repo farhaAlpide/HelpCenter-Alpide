@@ -5,8 +5,11 @@ import Link from "next/link";
 import CollapseIcon from '@/images/collapse-icon.svg'
 // import CollapseIcon from '../../../images/collapse-icon.svg';
 import ExpandIcon from '@/images/expand-icon.svg';
+import useModuleList from '@/framework/sidebarList/use-moduleList';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu ,Divider} from 'antd';
+import { FaChevronDown } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa6";
 
 const items = [
     {
@@ -149,379 +152,9 @@ const items = [
         },
       ],
     },
-    
-    {
-        key: '2',
-        label: 'Sales Quote',
-        children: [
-          {
-            key: '21',
-            label: 'Option 1',
-          },
-          {
-            key: '22',
-            label: 'Option 2',
-          },
-          {
-            key: '23',
-            label: 'Option 3',
-          },
-          {
-            key: '24',
-            label: 'Option 4',
-          },
-        ],
-      },
-    
-      {
-      key: '3',
-      label: 'Sales Order',
-      children: [
-        {
-          key: '31',
-          label: 'Option 1',
-        },
-        {
-          key: '32',
-          label: 'Option 2',
-        },
-        {
-          key: '33',
-          label: 'Option 3',
-        },
-        {
-          key: '34',
-          label: 'Option 4',
-        },
-      ],
-    },
-
-    {
-        key: '4',
-        label: 'Package',
-        children: [
-          {
-            key: '41',
-            label: 'Option 1',
-          },
-          {
-            key: '42',
-            label: 'Option 2',
-          },
-          {
-            key: '43',
-            label: 'Option 3',
-          },
-          {
-            key: '44',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '5',
-        label: 'Shipment',
-        children: [
-          {
-            key: '51',
-            label: 'Option 1',
-          },
-          {
-            key: '52',
-            label: 'Option 2',
-          },
-          {
-            key: '53',
-            label: 'Option 3',
-          },
-          {
-            key: '54',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '6',
-        label: 'Sales Invoice',
-        children: [
-          {
-            key: '61',
-            label: 'Option 1',
-          },
-          {
-            key: '62',
-            label: 'Option 2',
-          },
-          {
-            key: '63',
-            label: 'Option 3',
-          },
-          {
-            key: '64',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '7',
-        label: 'Sales Payments',
-        children: [
-          {
-            key: '71',
-            label: 'Option 1',
-          },
-          {
-            key: '72',
-            label: 'Option 2',
-          },
-          {
-            key: '73',
-            label: 'Option 3',
-          },
-          {
-            key: '74',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '8',
-        label: 'Credit Memo',
-        children: [
-          {
-            key: '81',
-            label: 'Option 1',
-          },
-          {
-            key: '82',
-            label: 'Option 2',
-          },
-          {
-            key: '83',
-            label: 'Option 3',
-          },
-          {
-            key: '84',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '9',
-        label: 'Sales Support',
-        children: [
-          {
-            key: '91',
-            label: 'Option 1',
-          },
-          {
-            key: '92',
-            label: 'Option 2',
-          },
-          {
-            key: '93',
-            label: 'Option 3',
-          },
-          {
-            key: '94',
-            label: 'Option 4',
-          },
-        ],
-      },
+   
 
       
-
-  ];
-
-  const item2 = [
-    {
-      key: '1',
-      label: 'Suppliers',
-      children: [
-        {
-          key: '11',
-          label: 'Option 1',
-        },
-        {
-          key: '12',
-          label: 'Option 2',
-        },
-        {
-          key: '13',
-          label: 'Option 3',
-        },
-        {
-          key: '14',
-          label: 'Option 4',
-        },
-      ],
-    },
-    
-    {
-        key: '2',
-        label: 'Purchase Request',
-        children: [
-          {
-            key: '21',
-            label: 'Option 1',
-          },
-          {
-            key: '22',
-            label: 'Option 2',
-          },
-          {
-            key: '23',
-            label: 'Option 3',
-          },
-          {
-            key: '24',
-            label: 'Option 4',
-          },
-        ],
-      },
-    
-      {
-      key: '3',
-      label: 'RFQ',
-      children: [
-        {
-          key: '31',
-          label: 'Option 1',
-        },
-        {
-          key: '32',
-          label: 'Option 2',
-        },
-        {
-          key: '33',
-          label: 'Option 3',
-        },
-        {
-          key: '34',
-          label: 'Option 4',
-        },
-      ],
-    },
-
-    {
-        key: '4',
-        label: 'Goods Receipt Notes (GRN)',
-        children: [
-          {
-            key: '41',
-            label: 'Option 1',
-          },
-          {
-            key: '42',
-            label: 'Option 2',
-          },
-          {
-            key: '43',
-            label: 'Option 3',
-          },
-          {
-            key: '44',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '5',
-        label: 'Purchase Invoice',
-        children: [
-          {
-            key: '51',
-            label: 'Option 1',
-          },
-          {
-            key: '52',
-            label: 'Option 2',
-          },
-          {
-            key: '53',
-            label: 'Option 3',
-          },
-          {
-            key: '54',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '6',
-        label: 'Purchase Payments',
-        children: [
-          {
-            key: '61',
-            label: 'Option 1',
-          },
-          {
-            key: '62',
-            label: 'Option 2',
-          },
-          {
-            key: '63',
-            label: 'Option 3',
-          },
-          {
-            key: '64',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '7',
-        label: 'Debit Memo',
-        children: [
-          {
-            key: '71',
-            label: 'Option 1',
-          },
-          {
-            key: '72',
-            label: 'Option 2',
-          },
-          {
-            key: '73',
-            label: 'Option 3',
-          },
-          {
-            key: '74',
-            label: 'Option 4',
-          },
-        ],
-      },
-
-      {
-        key: '8',
-        label: 'Landed Cost',
-        children: [
-          {
-            key: '81',
-            label: 'Option 1',
-          },
-          {
-            key: '82',
-            label: 'Option 2',
-          },
-          {
-            key: '83',
-            label: 'Option 3',
-          },
-          {
-            key: '84',
-            label: 'Option 4',
-          },
-        ],
-      },
 
   ];
 
@@ -541,8 +174,7 @@ const items = [
     return key;
   };
   const levelKeysItems = getLevelKeys(items);
-const levelKeysItem1 = getLevelKeys(item1);
-const levelKeysItem2 = getLevelKeys(item2);
+  const levelKeysItem1 = getLevelKeys(item1);
 
 
 const SideBar = (props) => {
@@ -551,6 +183,16 @@ const SideBar = (props) => {
     const [stateOpenKeys1, setStateOpenKeys1] = useState(['2', '23']);
     const [stateOpenKeys2, setStateOpenKeys2] = useState(['2', '23']);
     const [stateOpenKeys3, setStateOpenKeys3] = useState(['2', '23']);
+
+    const [childOnList, setChildOnList] = useState([]);
+
+    const isChildOn = (id) => childOnList.includes(id);
+
+    const toggleChild = (id) => {
+      setChildOnList((prevList) =>
+        prevList.includes(id) ? prevList.filter((itemId) => itemId !== id) : [...prevList, id]
+      );
+    };
 
     const onOpenChange1 = (openKeys) => {
       const currentOpenKey = openKeys.find((key) => stateOpenKeys1.indexOf(key) === -1);
@@ -571,7 +213,9 @@ const SideBar = (props) => {
         setStateOpenKeys1(openKeys);
       }
     };
+    const {data: moduleList} = useModuleList()
 
+    console.log(moduleList ,"moduleList")
     const onOpenChange2 = (openKeys) => {
         const currentOpenKey = openKeys.find((key) => stateOpenKeys2.indexOf(key) === -1);
         // open
@@ -611,13 +255,66 @@ const SideBar = (props) => {
           setStateOpenKeys3(openKeys);
         }
       };
+
+      const getSubcategories = (subcategories = [], parentIndex = '0') => {
+      console.log("HandBurn",subcategories);
+
+        return subcategories.map((subcategory, i) => {
+          const index = `${parentIndex}.${i + 1}`;
+          const isSubcategoryOpen = isChildOn(subcategory.id);
+      
+          // Convert parentIndex to string and calculate the nesting level
+          const nestingLevel = parentIndex.toString().split('.').length;
+          const marginLeft = 30 + (nestingLevel - 1) * 10; // 30px base margin + 10px for each nesting level
+          return (
+            <React.Fragment key={index}>
+          
+                  <div 
+                  style={{ display: 'flex', alignItems: 'center', marginLeft: `${marginLeft}px` }}  
+                  onClick={() => toggleChild(subcategory.id)}>
+                    
+                    {subcategory?.subModules && subcategory.subModules.length > 0 && (
+                      <span
+                        style={{ marginRight: '10px', marginLeft: '-20px' }}
+                      >
+                        {isSubcategoryOpen ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
+                      </span>
+                    )}
+                    <div className='menuName'>{subcategory.name}</div>
+                  </div>
+                
+              {isSubcategoryOpen && getSubcategories(subcategory.subModules, index)}
+            </React.Fragment>
+          );
+        });
+      };
+      
+
     return (
     <div className={`sideBar ${props.close ? 'collapsed' : ''}`}>
-    <div className="menuItem1">
-    <div className="getStarted">
+      {/* <div className="menuItem">
+        <div className="getStarted">
     {!props.close && <h4>GET STARTED</h4>}
     
-        <img
+        
+        
+        </div>
+        {!props.close && (
+        <Menu className="menu"
+      mode="inline"
+      defaultSelectedKeys={['231']}
+      openKeys={stateOpenKeys1}
+      onOpenChange={onOpenChange1}
+     
+      items={items}
+    />
+    
+    
+    
+    )}
+ 
+    </div> */}
+    <img
         src={props.close ? ExpandIcon?.src : CollapseIcon?.src} 
         alt=''
         onClick={()=>{
@@ -630,60 +327,38 @@ const SideBar = (props) => {
         className={props.close ? 'expand-icon' : 'collapse-icon'}
         style={{ cursor: 'pointer' }}
       />
-        
-        </div>
-        {!props.close && (
-        <Menu className="menu"
-      mode="inline"
-      defaultSelectedKeys={['231']}
-      openKeys={stateOpenKeys1}
-      onOpenChange={onOpenChange1}
-     
-      items={items}
-    />)}
- 
+    {!props.close &&
+    <>
+      {(moduleList||[]).map((item, index) => (
+        <React.Fragment key={index}>
+          <div className="menuItem">
+            <div className="getStarted">
+              <h4> {item.name}</h4>
+              
+            </div>
+            <div className="plus-minus-icon">
+              <div>
+                {item.subModules && item.subModules.length > 0 && (item.subModules||[]).map((module, i)=>{
+                  return(
+                    <>
+                    <div className="menuArea" onClick={() => toggleChild(module.id)}>
+                    {isChildOn(module.id) ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
+                  <div className='menuName'>{module.name}</div>
+                  </div>
+                  {isChildOn(module.id) && getSubcategories(module.subModules, index + 1)}
+                    </>
+                  )
+                })}
+                
+              </div>
+            </div>
+          
+          </div>
+        </React.Fragment>
+      ))}
+    </>
+}
   
-  </div>
-
-  {!props.close && (
-                <>
-  <Divider />
-
-  <div className="menuItem2">
-    <div className="getStarted">
-        <h4>SALES MODULE</h4>
-        </div>
-        <Menu className="menu"
-      mode="inline"
-      defaultSelectedKeys={['231']}
-      openKeys={stateOpenKeys2}
-      onOpenChange={onOpenChange2}
-     
-      items={item1}
-    />
-  {/* <hr className="line"/> */}
-  
-  </div>
-  <Divider />
-
-  <div className="menuItem3">
-    <div className="getStarted">
-        <h4>PURCHASE MODULE</h4>
-        </div>
-        <Menu className="menu"
-      mode="inline"
-      defaultSelectedKeys={['231']}
-      openKeys={stateOpenKeys3}
-      onOpenChange={onOpenChange3}
-     
-      items={item2}
-    />
-  {/* <hr className="line"/> */}
- 
-  </div>
-  <Divider />
-  </>
-  )}
  </div>
  );
 };
