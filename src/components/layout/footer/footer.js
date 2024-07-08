@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button, Flex, Tooltip } from 'antd';
-import FooterStyle from '../Footer/Footer.css';
+
 import { LikeOutlined,DislikeOutlined,LeftOutlined,RightOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 

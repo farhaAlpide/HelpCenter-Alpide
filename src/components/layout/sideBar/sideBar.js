@@ -1,7 +1,6 @@
 // Components/NavBar.js
 import React, { useState } from 'react';
 import Link from "next/link";
-import SideBarStyle from './SideBar.css';
 //import { Collapse } from 'antd';
 import CollapseIcon from '@/images/collapse-icon.svg'
 // import CollapseIcon from '../../../images/collapse-icon.svg';

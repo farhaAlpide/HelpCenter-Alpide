@@ -6,9 +6,7 @@ import React, { useState } from 'react'
 import Header from '../components/layout/header/header';
 import SideBar from '../components/layout/sideBar/sideBar';
 import Main from '../components/layout/home/home';
-import CustomStyle from '../app/custom.css';
-
-
+import  './custom.css';
 
 
 export default function Home() {
@@ -18,9 +16,7 @@ export default function Home() {
     <>
       <div className="main-wrapper">
        <Header />
-        <div className="content-wrapper" 
-        style={{display:'flex'}}
-        >
+        <div className="content-wrapper" >
         <SideBar close={close}  setClose = {setClose}/>
         <div className="view-wrapper" style={{width:"100%"}}>
           <Main close={close}  setClose = {setClose}/>  

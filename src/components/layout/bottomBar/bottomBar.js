@@ -20,5 +20,5 @@ const items = [
     
   },
 ];
-const App = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+const App = () => <Tabs defaultActiveKey="3" items={items} onChange={onChange} />;
 export default App;

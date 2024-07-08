@@ -1,12 +1,8 @@
 // Home.js
 import React, { useEffect, useState } from 'react';
-import HomeStyle from '../Home/Home.css';
 import { Divider } from 'antd';
 import Footer from '../../layout/footer/footer';
 import salesInquiry from '@/images/salesInquiry.svg'
-import test from '@/images/test.png';
-import test1 from '@/images/test1.png';
-import test2 from '@/images/test2.png';
 import Breadcrumb from '../../layout/breadcrumb/breadcrumb';
 
 function Home(props) {

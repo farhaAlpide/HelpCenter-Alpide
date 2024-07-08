@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Select } from 'antd';
 import Link from "next/link";
 import AlpideDocs from '../../../images/alpideDocsLogo.svg';
-import NavBarStyle from './header.css';
+
 import { Input, Space } from 'antd';
 import BottomBar from '../bottomBar/bottomBar';
 import UsFlag from "@/images/usFlag.png";
