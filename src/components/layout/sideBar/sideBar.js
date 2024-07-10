@@ -1,10 +1,13 @@
 // Components/NavBar.js
-import React, { useState } from 'react';
+"use-client"
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 //import { Collapse } from 'antd';
 import CollapseIcon from '@/images/collapse-icon.svg'
 // import CollapseIcon from '../../../images/collapse-icon.svg';
 import ExpandIcon from '@/images/expand-icon.svg';
+
+import { useRouter } from 'next/navigation';
 import useModuleList from '@/framework/sidebarList/use-moduleList';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu ,Divider} from 'antd';
@@ -179,188 +182,202 @@ const items = [
 
 const SideBar = (props) => {
 
-    const {setClose , close}  = props;
-    const [stateOpenKeys1, setStateOpenKeys1] = useState(['2', '23']);
-    const [stateOpenKeys2, setStateOpenKeys2] = useState(['2', '23']);
-    const [stateOpenKeys3, setStateOpenKeys3] = useState(['2', '23']);
+  const {setClose , close}  = props;
+  const [stateOpenKeys1, setStateOpenKeys1] = useState(['2', '23']);
+  const [stateOpenKeys2, setStateOpenKeys2] = useState(['2', '23']);
+  const [stateOpenKeys3, setStateOpenKeys3] = useState(['2', '23']);
 
-    const [childOnList, setChildOnList] = useState([]);
+  const [isSticky, setIsSticky] = useState(false);
 
-    const isChildOn = (id) => childOnList.includes(id);
+  const [childOnList, setChildOnList] = useState([]);
 
-    const toggleChild = (id) => {
-      setChildOnList((prevList) =>
-        prevList.includes(id) ? prevList.filter((itemId) => itemId !== id) : [...prevList, id]
+  const isChildOn = (id) => childOnList.includes(id);
+   const router = useRouter();
+  const toggleChild = (id) => {
+    setChildOnList((prevList) =>
+      prevList.includes(id) ? prevList.filter((itemId) => itemId !== id) : [...prevList, id]
+    );
+  };
+
+  const onOpenChange1 = (openKeys) => {
+    const currentOpenKey = openKeys.find((key) => stateOpenKeys1.indexOf(key) === -1);
+    // open
+    if (currentOpenKey !== undefined) {
+      const repeatIndex = openKeys
+        .filter((key) => key !== currentOpenKey)
+        .findIndex((key) => levelKeysItems[key] === levelKeysItems[currentOpenKey]);
+      setStateOpenKeys1(
+        openKeys
+          // remove repeat key
+          .filter((_, index) => index !== repeatIndex)
+          // remove current level all child
+          .filter((key) => levelKeysItems[key] <= levelKeysItems[currentOpenKey]),
       );
-    };
+    } else {
+      // close
+      setStateOpenKeys1(openKeys);
+    }
+  };
+  const {data: moduleList} = useModuleList()
 
-    const onOpenChange1 = (openKeys) => {
-      const currentOpenKey = openKeys.find((key) => stateOpenKeys1.indexOf(key) === -1);
+  const onOpenChange2 = (openKeys) => {
+      const currentOpenKey = openKeys.find((key) => stateOpenKeys2.indexOf(key) === -1);
       // open
       if (currentOpenKey !== undefined) {
         const repeatIndex = openKeys
           .filter((key) => key !== currentOpenKey)
-          .findIndex((key) => levelKeysItems[key] === levelKeysItems[currentOpenKey]);
-        setStateOpenKeys1(
+          .findIndex((key) => levelKeysItem1[key] === levelKeysItem1[currentOpenKey]);
+        setStateOpenKeys2(
           openKeys
             // remove repeat key
             .filter((_, index) => index !== repeatIndex)
             // remove current level all child
-            .filter((key) => levelKeysItems[key] <= levelKeysItems[currentOpenKey]),
+            .filter((key) => levelKeysItem1[key] <= levelKeysItem1[currentOpenKey]),
         );
       } else {
         // close
-        setStateOpenKeys1(openKeys);
+        setStateOpenKeys2(openKeys);
       }
     };
-    const {data: moduleList} = useModuleList()
 
-    console.log(moduleList ,"moduleList")
-    const onOpenChange2 = (openKeys) => {
-        const currentOpenKey = openKeys.find((key) => stateOpenKeys2.indexOf(key) === -1);
-        // open
-        if (currentOpenKey !== undefined) {
-          const repeatIndex = openKeys
-            .filter((key) => key !== currentOpenKey)
-            .findIndex((key) => levelKeysItem1[key] === levelKeysItem1[currentOpenKey]);
-          setStateOpenKeys2(
-            openKeys
-              // remove repeat key
-              .filter((_, index) => index !== repeatIndex)
-              // remove current level all child
-              .filter((key) => levelKeysItem1[key] <= levelKeysItem1[currentOpenKey]),
-          );
-        } else {
-          // close
-          setStateOpenKeys2(openKeys);
-        }
-      };
+    const onOpenChange3 = (openKeys) => {
+      const currentOpenKey = openKeys.find((key) => stateOpenKeys3.indexOf(key) === -1);
+      // open
+      if (currentOpenKey !== undefined) {
+        const repeatIndex = openKeys
+          .filter((key) => key !== currentOpenKey)
+          .findIndex((key) => levelKeysItem2[key] === levelKeysItem2[currentOpenKey]);
+        setStateOpenKeys3(
+          openKeys
+            // remove repeat key
+            .filter((_, index) => index !== repeatIndex)
+            // remove current level all child
+            .filter((key) => levelKeysItem2[key] <= levelKeysItem2[currentOpenKey]),
+        );
+      } else {
+        // close
+        setStateOpenKeys3(openKeys);
+      }
+    };
 
-      const onOpenChange3 = (openKeys) => {
-        const currentOpenKey = openKeys.find((key) => stateOpenKeys3.indexOf(key) === -1);
-        // open
-        if (currentOpenKey !== undefined) {
-          const repeatIndex = openKeys
-            .filter((key) => key !== currentOpenKey)
-            .findIndex((key) => levelKeysItem2[key] === levelKeysItem2[currentOpenKey]);
-          setStateOpenKeys3(
-            openKeys
-              // remove repeat key
-              .filter((_, index) => index !== repeatIndex)
-              // remove current level all child
-              .filter((key) => levelKeysItem2[key] <= levelKeysItem2[currentOpenKey]),
-          );
-        } else {
-          // close
-          setStateOpenKeys3(openKeys);
-        }
-      };
+    const getSubcategories = (subcategories = [], parentIndex = '0') => {
+    console.log("HandBurn",subcategories);
 
-      const getSubcategories = (subcategories = [], parentIndex = '0') => {
-      console.log("HandBurn",subcategories);
-
-        return subcategories.map((subcategory, i) => {
-          const index = `${parentIndex}.${i + 1}`;
-          const isSubcategoryOpen = isChildOn(subcategory.id);
-      
-          // Convert parentIndex to string and calculate the nesting level
-          const nestingLevel = parentIndex.toString().split('.').length;
-          const marginLeft = 30 + (nestingLevel - 1) * 10; // 30px base margin + 10px for each nesting level
-          return (
-            <React.Fragment key={index}>
-          
-                  <div 
-                  style={{ display: 'flex', alignItems: 'center', marginLeft: `${marginLeft}px` }}  
-                  onClick={() => toggleChild(subcategory.id)}>
-                    
-                    {subcategory?.subModules && subcategory.subModules.length > 0 && (
-                      <span
-                        style={{ marginRight: '10px', marginLeft: '-20px' }}
-                      >
-                        {isSubcategoryOpen ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
-                      </span>
-                    )}
-                    <div className='menuName'>{subcategory.name}</div>
-                  </div>
-                
-              {isSubcategoryOpen && getSubcategories(subcategory.subModules, index)}
-            </React.Fragment>
-          );
-        });
-      };
-      
-
-    return (
-    <div className={`sideBar ${props.close ? 'collapsed' : ''}`}>
-      {/* <div className="menuItem">
-        <div className="getStarted">
-    {!props.close && <h4>GET STARTED</h4>}
+      return subcategories.map((subcategory, i) => {
+        const index = `${parentIndex}.${i + 1}`;
+        const isSubcategoryOpen = isChildOn(subcategory.id);
     
+        // Convert parentIndex to string and calculate the nesting level
+        const nestingLevel = parentIndex.toString().split('.').length;
+        const marginLeft = 30 + (nestingLevel - 1) * 10; // 30px base margin + 10px for each nesting level
+        return (
+          <React.Fragment key={index}>
         
-        
-        </div>
-        {!props.close && (
-        <Menu className="menu"
-      mode="inline"
-      defaultSelectedKeys={['231']}
-      openKeys={stateOpenKeys1}
-      onOpenChange={onOpenChange1}
-     
-      items={items}
-    />
-    
-    
-    
-    )}
- 
-    </div> */}
-    <img
-        src={props.close ? ExpandIcon?.src : CollapseIcon?.src} 
-        alt=''
-        onClick={()=>{
-          
-          setClose(!close)
-
-          
-
-        }}
-        className={props.close ? 'expand-icon' : 'collapse-icon'}
-        style={{ cursor: 'pointer' }}
-      />
-    {!props.close &&
-    <>
-      {(moduleList||[]).map((item, index) => (
-        <React.Fragment key={index}>
-          <div className="menuItem">
-            <div className="getStarted">
-              <h4> {item.name}</h4>
+                <div 
+                style={{ display: 'flex', alignItems: 'center', marginLeft: `${marginLeft}px` }}  
+                onClick={() => toggleChild(subcategory.id)}>
+                  
+                  {subcategory?.subModules && subcategory.subModules.length > 0 && (
+                    <span
+                      style={{ marginRight: '10px', marginLeft: '-20px' }}
+                    >
+                      {isSubcategoryOpen ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
+                    </span>
+                  )}
+                  <div className='menuName'>{subcategory.name}</div>
+                </div>
               
-            </div>
-            <div className="plus-minus-icon">
-              <div>
-                {item.subModules && item.subModules.length > 0 && (item.subModules||[]).map((module, i)=>{
-                  return(
-                    <>
-                    <div className="menuArea" onClick={() => toggleChild(module.id)}>
-                    {isChildOn(module.id) ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
-                  <div className='menuName'>{module.name}</div>
-                  </div>
-                  {isChildOn(module.id) && getSubcategories(module.subModules, index + 1)}
-                    </>
-                  )
-                })}
-                
-              </div>
-            </div>
+            {isSubcategoryOpen && getSubcategories(subcategory.subModules, index)}
+          </React.Fragment>
+        );
+      });
+    };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+      <div className={`sideBar ${isSticky ? 'sticky' : ''} ${props.close ? 'collapsed' : ''}`}>
+        {/* <div className="menuItem">
+          <div className="getStarted">
+      {!props.close && <h4>GET STARTED</h4>}
+      
+          
           
           </div>
-        </React.Fragment>
-      ))}
-    </>
-}
+          {!props.close && (
+          <Menu className="menu"
+        mode="inline"
+        defaultSelectedKeys={['231']}
+        openKeys={stateOpenKeys1}
+        onOpenChange={onOpenChange1}
+      
+        items={items}
+      />
+      
+      
+      
+      )}
   
- </div>
- );
+      </div> */}
+      <div onClick={()=>{setClose(!close)}} className='closeButton'>
+        <img
+            src={props.close ? ExpandIcon?.src : CollapseIcon?.src} 
+            alt=''
+            
+            // className={props.close ? 'expand-icon' : 'collapse-icon'}
+          />
+      </div>
+      {!props.close &&
+      <>
+        {(moduleList||[]).map((item, index) => (
+          <React.Fragment key={index}>
+            <div className="menuItem">
+              <div className="getStarted">
+                <h4> {item.name}</h4>
+                
+              </div>
+              <div className="plus-minus-icon">
+                <div>
+                  {item.subModules && item.subModules.length > 0 && (item.subModules||[]).map((module, i)=>{
+                    return(
+                      <>
+                      <div className="menuArea" onClick={() => {
+                        toggleChild(module.id)
+                         router.push(`module/${(module.name||"").replaceAll(' ','-').toLowerCase()}`)
+                      }}>
+                      {isChildOn(module.id) ? <FaChevronDown color="#58596C" /> : <FaAngleRight color="#58596C" />}
+                    <div className='menuName'>{module.name}</div>
+                    </div>
+                    {isChildOn(module.id) && getSubcategories(module.subModules, index + 1)}
+                      </>
+                    )
+                  })}
+                  
+                </div>
+              </div>
+            
+            </div>
+          </React.Fragment>
+        ))}
+      </>
+  }
+    
+      </div>
+  );
 };
 
 export default SideBar;

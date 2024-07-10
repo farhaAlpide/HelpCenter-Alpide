@@ -91,7 +91,7 @@ function Home(props) {
 
             <div className="image">
               {/* <div className="header"> */}
-              <div class="header">
+              <div class="imgHeader">
                 <div className="circle1"></div>
                 <div className="circle2"></div>
                 <div className="circle3"></div>
@@ -149,13 +149,13 @@ function Home(props) {
           
 
         </div>
-        <div className="rightSection" style={isFixed ? {position: "fixed", top:"4%"} : {}}>
+        {/* <div className="rightSection" style={isFixed ? {position: "fixed", top:"4%"} : {}}>
                 <iframe className="customIframe" width="230" height="120" src="https://www.youtube.com/embed/W6NZfCO5SIk?si=IrcVvS1h5jiYr-Vg&amp;start=301" 
                 title="YouTube video player" frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                 </iframe>
-                </div>
+                </div> */}
 
       </div>
 
